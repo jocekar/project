@@ -1,0 +1,96 @@
+{% extends 'folder/master.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+     <div class="row">
+          <div class="col-lg-4">
+               {% if page == 'create' %}
+               <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {{ form.title|as_crispy_field }}
+                    {{ form.image_date|as_crispy_field }}
+                    {{ form.category|as_crispy_field }}
+                    {{ form.text|as_crispy_field }}
+                    {{ form.image|as_crispy_field }}
+
+                    <input type="submit" value="save" class="btn btn-primary btn-md">
+               </form>
+               {% endif %}
+
+               {% if page == 'edit' %}
+               <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {{ form.title|as_crispy_field }}
+                    {{ form.image_date|as_crispy_field }}
+                    {{ form.category|as_crispy_field }}
+                    {{ form.text|as_crispy_field }}
+                    {{ form.image|as_crispy_field }}
+
+                    <input type="submit" value="Update" class="btn btn-success btn-md">
+               </form>
+
+               {% endif %}
+
+               {% if page == 'views' %}
+               <div class="card">
+                    <div class="card-header">
+                         {{image.title}} <span style="float:right;">{{image.created|timesince}}</span>
+                    </div>
+                    <div class="card-body">
+                         <img src="{{image.image.url}}" alt="" style="width: 100%;height: 150px;">
+                         <h4 class="card-title">{{image.category}}</h4>
+                         <p class="card-text">{{image.text}}</p>
+                    </div>
+                    <div class="card-footer text-muted">
+                         {{image.image_date}} <span style="float:right;"><a href="{% url 'imagepage' %}">Go Back</a></span>
+                    </div>
+               </div>
+               {% endif %}
+
+          </div>
+
+          <div class="col-lg-8">
+               {% include 'folder/alert.html' %}
+               <table class="table table-dark table-hover">
+                    <thead>
+                         <tr>
+                              <th>No</th>
+                              <th>Title</th>
+                              <th>Image-Date</th>
+                              <th>Text</th>
+                              <th>Image</th>
+                              <th>Time</th>
+                              <th>category</th>
+                              <th>Actions</th>
+                         </tr>
+                    </thead>
+                    <tbody>
+                         {% for image in images %}
+                         <tr>
+                              <td>{{ forloop.counter }}</td>
+                              <td>{{ image.title }}</td>
+                              <td>{{ image.image_date}}</td>
+                              <td>{{image.text}}</td>
+                              <td>
+                                   <img src="{{image.image.url}}" alt="">
+                              </td>
+                              <td>{{image.created|timesince}}</td>
+                              <td>{{image.category}}</td>
+                              <td>
+                                   <a href="{% url 'image-viewspage' image.id %}"><i class="bi bi-eye text-white"></i></a>
+                                   <a href="{% url 'image-editpage' image.id %}"><i class="bi bi-pen text-white"></i></a>
+                                   <a href="{% url 'image-delete' image.id %}"><i class="bi bi-trash text-white"></i></a>
+                              </td>
+                         </tr>
+                         {% endfor %}
+                    </tbody>
+               </table>
+          </div>
+
+     </div>
+     <!-- row-end -->
+</div>
+<!-- container-end -->
+{% endblock content %}

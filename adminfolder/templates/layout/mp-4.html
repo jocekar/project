@@ -1,0 +1,53 @@
+{% extends 'folder/master.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+     <div class="row">
+          <div class="col-lg-4">
+               <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {{form.title|as_crispy_field}}
+                    {{form.category|as_crispy_field}}
+                    {{form.music|as_crispy_field}}
+
+                    <input type="submit" value="Sav">
+               </form>
+          </div>
+
+          <div class="col-lg-8">
+               <table class="table table-dark table-hover">
+                    <thead>
+                         <tr>
+                              <th>No</th>
+                              <th>Title</th>
+                              <th>Category</th>
+                              <th>Music</th>
+                              <th>Actions</th>
+                         </tr>
+                    </thead>
+
+                    <tbody>
+                         {% for music in musics %}
+                         <tr>
+                              <td>{{forloop.counter}}</td>
+                              <td>{{music.title}}</td>
+                              <td>{{music.category}}</td>
+                              <td>
+                                   <video controls class="w-50 h-49">
+                                        <source src="{{music.music.url}}" type="video/mp4" style="width: 50px;">
+                                      </video>
+                              </td>
+                              <td>
+                                   <a href=""><i class="bi bi-pen text-white"></i></a>
+                                   <a href=""><i class="bi bi-trash text-white"></i></a>
+                              </td>
+                         </tr>
+                         {% endfor %}
+                    </tbody>
+               </table>
+          </div>
+
+     </div>
+</div>
+{% endblock content %}

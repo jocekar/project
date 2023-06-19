@@ -1,0 +1,25 @@
+{% extends 'folder/master.html' %}
+{% block content %}
+     
+<div class="card">
+     <div class="card-header text-center">
+          {{about.about}}
+     </div>
+     <div class="card-body">
+          
+         <span class="card-text">
+           Title({{about.title}}) //
+           Phone({{about.phone}} )//
+           City({{about.city}}) // 
+           Website({{about.website}}) //
+           Email({{about.email}}) //
+           Birthday({{about.birthday}})
+          </span>
+          <hr>
+          <p>{{about.descriptions}}</p>
+     </div>
+     <div class="card-footer text-muted">
+          <a href="{% url 'aboutpage' %}" class="btn btn-primary btn-md">Go Back</a>
+     </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,133 @@
+{% extends 'folder/master.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+     <div class="row">
+          <div class="col-lg-4">
+               {% if page == 'create' %}
+               <form action="" method="POST">
+                    {% csrf_token %}
+
+                   <div class="row">
+
+                    <div class="col-lg-6">
+                         {{form.about|as_crispy_field}}
+                    </div>
+
+                    <div class="col-lg-6">
+                         {{form.phone|as_crispy_field}}
+                    </div>
+
+                    <div class="col-lg-6">
+                         {{form.title|as_crispy_field}}
+                    </div>
+
+                    <div class="col-lg-6">
+                         {{form.birthday|as_crispy_field}}
+                    </div>
+
+                    <div class="col-lg-6">
+                         {{form.website|as_crispy_field}}
+                    </div>
+
+                    <div class="col-lg-6">
+                         {{form.email|as_crispy_field}}
+                    </div>
+
+                    <div class="col-lg-12">
+                         {{form.city|as_crispy_field}}
+                    </div>
+
+                    <div class="col-lg-12">
+                         {{form.descriptions|as_crispy_field}}
+                    </div>
+
+                   </div>
+                   <input type="submit" value="Save" class="btn btn-primary">
+               </form>
+               {% else %}
+
+               <form action="" method="POST">
+                    {% csrf_token %}
+
+                   <div class="row">
+
+                    <div class="col-lg-6">
+                         {{form.about|as_crispy_field}}
+                    </div>
+
+                    <div class="col-lg-6">
+                         {{form.phone|as_crispy_field}}
+                    </div>
+
+                    <div class="col-lg-6">
+                         {{form.title|as_crispy_field}}
+                    </div>
+
+                    <div class="col-lg-6">
+                         {{form.birthday|as_crispy_field}}
+                    </div>
+
+                    <div class="col-lg-6">
+                         {{form.website|as_crispy_field}}
+                    </div>
+
+                    <div class="col-lg-6">
+                         {{form.email|as_crispy_field}}
+                    </div>
+
+                    <div class="col-lg-12">
+                         {{form.city|as_crispy_field}}
+                    </div>
+
+                    <div class="col-lg-12">
+                         {{form.descriptions|as_crispy_field}}
+                    </div>
+
+                   </div>
+                   <input type="submit" value="Update" class="btn btn-info">
+               </form>
+
+               {% endif %}
+
+                   
+          </div><!-- col-end -->
+
+          
+
+          <div class="col-lg-8">
+               <table class="table">
+                    {% include 'folder/alert.html' %}
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">About</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Birthday</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Website</th>
+                        
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for about in abouts %}
+                      <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ about.about }}</td>
+                        <td>{{about.title}}</td>
+                        <td>{{about.birthdayAge}}</td>
+                        <td>{{about.phone}}</td>
+                        <td>{{about.website}}</td>
+                        
+                        <td>
+                         <a href="{% url 'about-viewspage' about.id %}"><i class="bi bi-eye text-white"></i></a>
+                         <a href="{% url 'abouteditpage' about.id %}"><i class="text-white bi bi-pen"></i></a>
+                         <a href="{% url 'aboutdeletepage' about.id %}"><i class="bi bi-trash text-white"></i></a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+          </div>
+     </div><!-- row-end -->
+{% endblock content %}

@@ -1,0 +1,71 @@
+{% extends 'folder/master.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+     <h4 class="text-white">Homepage</h4>
+
+     {% if page == 'create' %}
+     <div class="row">
+          <div class="col-lg-4">
+               <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {{form.name|as_crispy_field}}
+                    {{form.nav|as_crispy_field}}
+                    {{form.text|as_crispy_field}}
+                    {{form.image|as_crispy_field}}
+                    <input type="submit" value="save" class="btn btn-primary btn-md">
+               </form>
+          </div>
+          {% else %}
+
+          <div class="row">
+               <div class="col-lg-4">
+                    <form action="" method="POST" enctype="multipart/form-data">
+                         {% csrf_token %}
+     
+                         {{form.name|as_crispy_field}}
+                         {{form.nav|as_crispy_field}}
+                         {{form.text|as_crispy_field}}
+                         {{form.image|as_crispy_field}}
+                         <input type="submit" value="Update" class="btn btn-primary btn-md">
+                    </form>
+               </div>
+
+          {% endif %}
+
+          <div class="col-lg-8">
+              
+               <table class="table">
+                   {% include 'folder/alert.html' %}
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Navbar</th>
+                        <th scope="col">Text</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for home in homes %}
+                      <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ home.name }}</td>
+                        <td>{{home.nav}}</td>
+                        <td>{{home.text|truncatechars:10}}</td>
+                        <td><img src="{{home.image.url}}" alt=""></td>
+                        <td>
+                         <a href="{% url 'editbackendbackendpage' home.id %}"><i class="bi bi-pen" style="color: white;"></i></a>
+                         <a href="{% url 'deletebackendpage' home.id %}"><i class="bi bi-trash text-white"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+          </div>
+     </div>
+</div>
+{% endblock content %}
