@@ -32,7 +32,7 @@ class About(models.Model):
 
 ### my skill
 class Skill(models.Model):
-     skill = models.IntegerField(max_length=4, null=True)
+     skill = models.IntegerField( null=True)
      title = models.CharField(max_length=15, null=True)
 
      def __str__(self):
