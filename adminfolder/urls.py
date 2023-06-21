@@ -25,6 +25,10 @@ urlpatterns = [
     path('image-delete/<str:pk>/', views.image_delete, name='image-delete'),
 
     path('music/', views.music, name='musicpage'),
+
+    path('song/', views.song, name='songpage'),
+    path('song-ed/<str:pk>/', views.songedit, name='songeditpage'),
+    path('song-del/<str:pk>/', views.songdelete, name='song-d-p'),
     
 
 ]

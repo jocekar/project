@@ -286,3 +286,51 @@ def music(request):
           'musics':musics
      } 
      return render(request, 'layout/mp-4.html', context)
+
+def song(request):
+     page = 'create'
+     songs = Mp_3.objects.all()
+     form = SongForm()
+     if request.method == 'POST':
+          title = request.POST.get('title')
+          form = SongForm(request.POST, request.FILES)
+          if form.is_valid():
+               form.save()
+               messages.success(request, "your {} create song successfully".format(title))
+               return redirect("songpage")
+
+     context = {
+          'page':page,
+          'form':form,
+          'songs':songs
+     }
+     return render(request, 'layout/mp-3.html', context)
+
+## song-edit
+def songedit(request, pk):
+     page = 'edit'
+     songs = Mp_3.objects.all()
+     song = Mp_3.objects.get( id=pk )
+     form = SongForm(instance=song)
+
+     if request.method == 'POST':
+          title = request.POST.get('title')
+          form = SongForm(request.POST, request.FILES, instance=song)
+          if form.is_valid():
+               form.save()
+               messages.success(request, "your {} update song successfully".format(title))
+               return redirect("songpage")
+
+     context ={
+          'form':form,
+          'page':page,
+          'songs':songs,
+          'song':song
+     }
+     return render(request, 'layout/mp-3.html', context)
+
+### song-del
+def songdelete(request, pk):
+     song = Mp_3.objects.get( id=pk )
+     song.delete()
+     return redirect('songpage')

@@ -122,3 +122,23 @@ class MusicForm(ModelForm):
      def __init__(self,*args, **kwargs):
         super(MusicForm, self).__init__(*args, **kwargs)
         self.fields['category'].empty_label = 'category...'
+
+## song
+class SongForm(ModelForm):
+     class Meta:
+          model = Mp_3
+          fields = '__all__'
+          labels = {
+               'title':'Songname',
+               'category':'Category',
+               'audio_file':'Song file'
+          }
+          ### widgets
+          widgets = {
+               'title':forms.TextInput(attrs=({'placeholder':'enter your song title...','class':'form-control'})),
+               'category':forms.Select(attrs=({'class':'form-control'})),
+               'audio_file':forms.FileInput(attrs=({'class':'form-control'}))
+          }
+     def __init__(self,*args, **kwargs):
+          super(SongForm, self).__init__(*args, **kwargs)
+          self.fields['category'].empty_label = 'category...'
