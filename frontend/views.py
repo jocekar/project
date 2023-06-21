@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from adminfolder import *
 from adminfolder.models import *
 # Create your views here.
 
