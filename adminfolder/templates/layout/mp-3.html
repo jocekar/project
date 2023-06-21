@@ -1,0 +1,54 @@
+{% extends 'folder/master.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+     <div class="row">
+          <div class="col-lg-4">
+               <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {{form.title|as_crispy_field}}
+                    {{form.category|as_crispy_field}}
+                    {{form.song|as_crispy_field}}
+
+                    <input type="submit" value="Sav">
+               </form>
+          </div>
+
+          <div class="col-lg-8">
+               <table class="table table-dark table-hover">
+                    <thead>
+                         <tr>
+                              <th>No</th>
+                              <th>Title</th>
+                              <th>Category</th>
+                              <th>Song</th>
+                              <th>Actions</th>
+                         </tr>
+                    </thead>
+
+                    <tbody>
+                         {% for song in songs %}
+                         <tr>
+                              <td>{{forloop.counter}}</td>
+                              <td>{{song.title}}</td>
+                              <td>{{song.category}}</td>
+                              <td>
+                                   <audio controls id="player">
+                                        <source src="{{song.song.url}}" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                      </audio>
+                              </td>
+                              <td>
+                                   <a href=""><i class="bi bi-pen text-white"></i></a>
+                                   <a href=""><i class="bi bi-trash text-white"></i></a>
+                              </td>
+                         </tr>
+                         {% endfor %}
+                    </tbody>
+               </table>
+          </div>
+
+     </div>
+</div>
+{% endblock content %}

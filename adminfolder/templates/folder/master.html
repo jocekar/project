@@ -253,6 +253,15 @@
               </a>
             </li>
 
+            <li class="nav-item">
+              {% url 'songpage' as url %}
+              <a class="{% if request.path == url %} text-danger {% endif %}" href="{% url 'songpage' %}">
+                <span class="menu-title">
+                  <small>Song</small>
+                </span>
+              </a>
+            </li>
+
           </ul>
         </nav>
         <!-- partial -->

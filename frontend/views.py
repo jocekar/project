@@ -9,12 +9,14 @@ def frontend(request):
      image = Iamge.objects.all()
      skills = Skill.objects.all()
      musics = Music.objects.all()
+     songs= Song.objects.all()
      context ={
      "home":home,
      'about':about,
      'image':image,
      'skills':skills,
-     'musics':musics
+     'musics':musics,
+     'songs':songs
     }
      return render(request,'pages/index.html',context)
 

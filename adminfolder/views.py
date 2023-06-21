@@ -286,3 +286,22 @@ def music(request):
           'musics':musics
      } 
      return render(request, 'layout/mp-4.html', context)
+
+### song
+def song(request):
+     songs = Song.objects.all()
+
+     form = SongForm()
+     if request.method == 'POST':
+          title = request.POST.get('title')
+          form = SongForm(request.POST, request.FILES)
+          if form.is_valid():
+               form.save()
+               messages.success(request, "you {} create song successfully".format(title))
+               return redirect('songpage')
+
+     context = {
+          'form':form,
+          'songs':songs
+     } 
+     return render(request, 'layout/mp-3.html', context)

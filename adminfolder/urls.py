@@ -25,6 +25,9 @@ urlpatterns = [
     path('image-delete/<str:pk>/', views.image_delete, name='image-delete'),
 
     path('music/', views.music, name='musicpage'),
+
+    path('song/', views.song, name='songpage'),
+
     
 
 ]

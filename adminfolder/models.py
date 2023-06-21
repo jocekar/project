@@ -68,3 +68,12 @@ class Music(models.Model):
 
      def __str__(self):
           return self.title
+
+### song
+class Song(models.Model):
+     title = models.CharField(max_length=40, null=True)
+     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
+     song = models.FileField(upload_to ='song/')
+
+     def __str__(self):
+          return self.title
